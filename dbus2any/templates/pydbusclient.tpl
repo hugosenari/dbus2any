@@ -68,11 +68,11 @@ if member.tag == 'method' %}
         See also:
             http://dbus.freedesktop.org/doc/dbus-specification.html#idp94392448
         '''
-        return self._dbus_interface.{{ member.attrib.name }}
+        return self._get_property('{{ member.attrib.name }}')
     {% if member.attrib.access == 'readwrite' %}
     @{{ member.attrib.name }}.setter
     def {{ member.attrib.name }}(self, value):
-        self._dbus_interface.{{ member.attrib.name }} = value
+        self._set_property('{{ member.attrib.name }}', value)
     {%endif
 %}{% elif member.tag == 'signal' %}
     def {{ member.attrib.name }}(self, callback):
@@ -109,9 +109,17 @@ class {{ interface.attrib.name.split('.')[-1] }}(object):
         self._dbus_name = bus_name {% if args.busName %}or "{{ args.busName }}"{% endif %}
 
         bus = bus or dbus.SessionBus()
-        self._dbus_object =  bus.get_object(bus_name, object_path)
+        self._dbus_object =  bus.get_object(self._dbus_name, self._dbus_object_path)
         self._dbus_interface = dbus.Interface(self._dbus_object,
             dbus_interface=self._dbus_interface_name)
+        self._dbus_properties = obj = dbus.Interface(self._dbus_object,
+            "org.freedesktop.DBus.Properties")
+
+    def _get_property(self, name):
+        return self._dbus_properties.Get(self._dbus_interface_name, name)
+
+    def _set_property(self, name, val):
+        return self._dbus_properties.Set(self._dbus_interface_name, name, val)
 
     {% for member in interface %}{{ print_member(member) }}{% endfor %}
 {% endfor %}
