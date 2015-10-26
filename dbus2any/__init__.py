@@ -1,8 +1,10 @@
-'''
-Converts dbus to any using xslt
+# -*- coding: utf-8 -*-
 
-Created on Jan 5, 2012
+__author__ = 'Hugo Ribeiro'
+__email__ = 'hugosenari@gmail.com'
+__version__ = '0.1.0'
 
-@author: hugosenari
-'''
 
+from .xml2any import xml2any
+from .dbus2xml import dbus2xml
+from .list import read_template, list_templates

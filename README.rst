@@ -1,40 +1,20 @@
-===========
-Dbus To Any 
-===========
+===============================
+dbus2any
+===============================
 
-This use dbus introspection to convert
-running dbus interface into any code
-defined by xslt
+.. image:: https://img.shields.io/travis/hugosenari/dbus2any.svg
+        :target: https://travis-ci.org/hugosenari/dbus2any
 
-Xml definition file:
-http://standards.freedesktop.org/dbus/1.0/introspect.dtd
-
-
-Require:
-========
-
-libxslt
+.. image:: https://img.shields.io/pypi/v/dbus2any.svg
+        :target: https://pypi.python.org/pypi/dbus2any
 
 
-Usage:
-======
+convert dbus instrospection to code
 
-python dbus2any.py "xslt" "bus name" "object path"
+* Free software: ISC license
+* Documentation: https://dbus2any.readthedocs.org.
 
+Features
+--------
 
-Command line example:
-----------------------
->>> #this exemple require gmusicbrowser to be running
->>> python dbus2any/dbustoany.py "xslt/pydbusdecorator.xsl" "org.mpris.MediaPlayer2.gmusicbrowser" "/org/mpris/MediaPlayer2"
->>> python dbus2any/dbustoany.py "xslt/pydbusdecorator.xsl" "im.pidgin.purple.PurpleService" "/im/pidgin/purple/PurpleObject"
-
-Code examples:
---------------
->>> from dbus2any import Dbus2Xml, Xml2Any
-
->>> dbus2xml = Dbus2Xml("org.mpris.MediaPlayer2.gmusicbrowser", "/org/mpris/MediaPlayer2")
-
->>> xml2any = Xml2Any(dbus2xml, "xslt/pydbusdecorator.xsl")
-
->>> print "All class: ", xml2any
-
+* Convert xml into python-dbus client
