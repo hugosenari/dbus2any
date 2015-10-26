@@ -18,3 +18,18 @@ Features
 --------
 
 * Convert xml into python-dbus client
+
+
+examples
+--------
+
+MPRIS2 media players
+
+> python -m dbus2any -t pydbusclient.tpl -n 'org.mpris.MediaPlayer2.gmusicbrowser' -p '/org/mpris/MediaPlayer2'
+
+> python -m dbus2any -t pydbusclient.tpl -n 'org.mpris.MediaPlayer2.vlc' -p '/org/mpris/MediaPlayer2'
+
+Pidgin (libpurple)
+
+> python -m dbus2any -t pydbusclient.tpl -n 'im.pidgin.purple.PurpleService' -p '/im/pidgin/purple/PurpleObject'
+
